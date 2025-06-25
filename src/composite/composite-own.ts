@@ -1,11 +1,11 @@
-abstract class Component {
-  abstract render(path: string): void;
+export abstract class Component {
+  abstract render(path: string): string;
 
   abstract add(component: Component): void;
   abstract remove(component: Component): void;
 }
 
-class Group extends Component {
+export class Group extends Component {
   private _children: Component[] = [];
   private _name: string;
 
@@ -19,15 +19,15 @@ class Group extends Component {
     return this._name;
   }
 
-  override render(path: string = "") {
+  override render(path: string = ""): string {
     const prefix = path === "" ? "" : `${path} -> `;
 
-    this._children.forEach((child) => {
-      child.render(`${prefix}Group(${this._name})`);
-    });
+    return this._children
+      .map((child) => child.render(`${prefix}Group(${this._name})`))
+      .join("\n");
   }
 
-  override add(component: Component) {
+  override add(component: Component): void {
     this._children.push(component);
   }
 
@@ -36,7 +36,7 @@ class Group extends Component {
   }
 }
 
-class Button extends Component {
+export class Button extends Component {
   private _content: string;
 
   constructor(content: string) {
@@ -49,26 +49,10 @@ class Button extends Component {
     return this._content;
   }
 
-  override render(path: string = ""): void {
-    console.log(`${path === "" ? "" : `${path} -> `}Button(${this._content})`);
+  override render(path: string = ""): string {
+    return `${path === "" ? "" : `${path} -> `}Button(${this._content})`;
   }
 
   override add(): void {}
   override remove(): void {}
 }
-
-// Usage Example
-const dialogGroup = new Group("dialog");
-const closeButton = new Button("X");
-
-dialogGroup.add(closeButton);
-
-const submitGroup = new Group("submit");
-const submitButton = new Button("Submit");
-const resetButton = new Button("Reset");
-
-submitGroup.add(submitButton);
-submitGroup.add(resetButton);
-dialogGroup.add(submitGroup);
-
-dialogGroup.render();
