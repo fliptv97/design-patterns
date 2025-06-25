@@ -25,7 +25,7 @@ abstract class Observer {
 }
 
 // Concrete subject
-class ClockTimer extends Subject {
+export class ClockTimer extends Subject {
   getHour(): number {
     return 0;
   }
@@ -44,10 +44,10 @@ class ClockTimer extends Subject {
 }
 
 // Concrete observer
-class DigitalClock extends Observer {
+export class DigitalClock extends Observer {
   private _subject: ClockTimer;
 
-  protected constructor(subject: ClockTimer) {
+  constructor(subject: ClockTimer) {
     super();
 
     this._subject = subject;

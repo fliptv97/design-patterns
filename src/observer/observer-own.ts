@@ -32,7 +32,7 @@ class Subject {
   }
 }
 
-class ConcreteSubject extends Subject {
+export class ConcreteSubject extends Subject {
   private _state = 0;
 
   public get state() {
@@ -56,11 +56,15 @@ abstract class Observer<T extends Subject> {
   abstract update(): void;
 }
 
-class ConcreteObserver extends Observer<ConcreteSubject> {
+export class ConcreteObserver extends Observer<ConcreteSubject> {
   private _state = 0;
 
   constructor(subject: ConcreteSubject) {
     super(subject);
+  }
+
+  get state() {
+    return this._state;
   }
 
   update(): void {
@@ -72,9 +76,3 @@ class ConcreteObserver extends Observer<ConcreteSubject> {
     console.log("ConcreteObserver.log:", this._state);
   }
 }
-
-// Usage example
-const subject = new ConcreteSubject();
-new ConcreteObserver(subject);
-
-subject.state = 69;
