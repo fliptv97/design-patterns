@@ -53,8 +53,8 @@ class Button extends Component {
     console.log(`${path === "" ? "" : `${path} -> `}Button(${this._content})`);
   }
 
-  override add(_: Component): void {}
-  override remove(_: Component): void {}
+  override add(): void {}
+  override remove(): void {}
 }
 
 // Usage Example
