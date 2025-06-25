@@ -4,13 +4,17 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "jest"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
     "@types/bun": "latest",
+    "@types/jest": "^30.0.0",
     "eslint": "^9.29.0",
+    "jest": "^30.0.3",
     "prettier": "^3.6.1",
+    "ts-jest": "^29.4.0",
     "typescript-eslint": "^8.35.0"
   },
   "peerDependencies": {
